@@ -28,12 +28,12 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-gray-500">
+    <nav className=" absolute   bg-transparent z-10 w-full text-xl font-bold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <NavLink to="/" className="text-white">
+            <NavLink to="/" className="">
               Your Logo
             </NavLink>
           </div>
@@ -42,7 +42,7 @@ const NavBar = () => {
           <div className="flex items-center sm:hidden">
             <button
               type="button"
-              className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200"
+              className=" focus:outline-none focus:text-gray-200"
               onClick={toggleMenu}
             >
               <svg
@@ -63,22 +63,22 @@ const NavBar = () => {
           <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
               <NavLink
-                to="/login"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+                to="/"
+                className=" px-3 py-2 rounded-md  font-medium"
               >
-                Login
+                Home
               </NavLink>
               <NavLink
-                to="/signup"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+                to="/"
+                className=" px-3 py-2 rounded-md  font-medium"
               >
-                signup
+                Instructors
               </NavLink>
               <NavLink
-                to="/signup"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+                to="/"
+                className=" px-3 py-2 rounded-md  font-medium"
               >
-                Menu 3
+                Classes
               </NavLink>
             </div>
           </div>
@@ -87,7 +87,7 @@ const NavBar = () => {
           <div className="hidden sm:block sm:ml-6">
             <div className="flex items-center">
               {!user ? (
-                <NavLink to="/login" className="text-white">
+                <NavLink to="/login" className="">
                   Login
                 </NavLink>
               ) : (
@@ -148,6 +148,7 @@ const NavBar = () => {
           </div>
         </div>
       )}
+      <hr />
     </nav>
   )
 }

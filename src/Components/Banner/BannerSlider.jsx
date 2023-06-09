@@ -12,6 +12,7 @@ import "./style.css";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 
+
 const BannerSlider =()=> {
   return (
     <>
@@ -29,13 +30,13 @@ const BannerSlider =()=> {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide className="w-4/6 h-96">
-            <img className="w-8 h-96 " src="https://i.ibb.co/YtrRLr7/pexels-mario-schafer-11322619.jpg" alt="" />
+        <SwiperSlide className="w-4/6 h-96 opacity-80">
+           <img className="w-4/6 h-96" src="https://i.ibb.co/NjXd4qX/pexels-anna-pou-8330249.jpg" alt="" />
         </SwiperSlide>
-        <SwiperSlide className="w-4/6 h-96">
+        <SwiperSlide className="w-4/6 h-96 opacity-90">
             <img className="w-4/6 h-96" src="https://i.ibb.co/NjXd4qX/pexels-anna-pou-8330249.jpg" alt="" />
         </SwiperSlide>
-        <SwiperSlide className="w-4/6 h-96">
+        <SwiperSlide className="w-4/6 h-96 opacity-90">
             <img className="w-4/6 h-96" src="https://i.ibb.co/RgCH36R/pexels-taryn-elliott-4457125.jpg" alt="" />
         </SwiperSlide>
       </Swiper>

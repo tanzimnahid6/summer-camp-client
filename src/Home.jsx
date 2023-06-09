@@ -1,14 +1,22 @@
-import BannerSlider from "./Components/Banner/BannerSlider";
+import BannerSlider from "./Components/Banner/BannerSlider"
+import PopularClass from "./Components/PopularClass/PopularClass"
+import SectionTitle from "./Components/SectionTitle"
 
 const Home = () => {
-    return (
-        <div>
-            <h1>This is home page</h1>
-            <div className="h-96">
-            <BannerSlider></BannerSlider>
-            </div>
-        </div>
-    );
-};
+  return (
+    <div>
+      <div className="h-[600px]">
+        <BannerSlider></BannerSlider>
+      </div>
+      <SectionTitle
+        heading={"Popular class"}
+        sub_heading={"this is sub heading ,added letter"}
+      ></SectionTitle>
+      <div>
+        <PopularClass></PopularClass>
+      </div>
+    </div>
+  )
+}
 
-export default Home;
+export default Home
