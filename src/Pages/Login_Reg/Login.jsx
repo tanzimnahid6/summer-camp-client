@@ -1,16 +1,38 @@
+import { createContext } from "react"
+import { useForm } from "react-hook-form"
+import { AuthContext } from "../../Provider/AuthProvider"
+import Swal from "sweetalert2"
+import { Link } from "react-router-dom"
 
-import { useForm } from 'react-hook-form';
+const Login = () => {
+  const { signIn } = createContext(AuthContext)
 
-const  Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm()
+  
 
   const onSubmit = (data) => {
-    console.log(data); // Handle form submission data
-  };
+    console.log(data)
+  
+    signIn(data.email, data.password)
+    .then((userCredential) => {
+      const user = userCredential.user
+      console.log(user)
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Login User successfully",
+        showConfirmButton: false,
+        timer: 1000,
+      })
+    })
+    .catch((error) => {
+      console.log("create user error", error)
+    })
+  }
 
   return (
     <div className="flex justify-center items-center mt-12 bg-gray-100">
@@ -24,13 +46,15 @@ const  Login = () => {
             <input
               type="email"
               id="email"
-              {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+              {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
               className={`w-full px-3 py-2 border ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                errors.email ? "border-red-500" : "border-gray-300"
               } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.email && (
-              <span className="text-red-500 text-sm mt-1">Please enter a valid email address</span>
+              <span className="text-red-500 text-sm mt-1">
+                Please enter a valid email address
+              </span>
             )}
           </div>
 
@@ -38,23 +62,30 @@ const  Login = () => {
             <label htmlFor="password" className="block mb-2">
               Password
             </label>
+            {/* TODO:password type change */}
             <input
-              type="password"
+              type="text"
+              defaultValue={"!4aASDFWF"}
               id="password"
-              {...register('password', {
+              {...register("password", {
                 required: true,
                 minLength: 8,
-                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/,
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/,
               })}
               className={`w-full px-3 py-2 border ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
+                errors.password ? "border-red-500" : "border-gray-300"
               } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.password && (
               <span className="text-red-500 text-sm mt-1">
-                Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.
+                Password must be at least 8 characters long and contain at least
+                one uppercase letter, one lowercase letter, and one number.
               </span>
             )}
+          </div>
+          <div className="my-4 ">
+            <p>Do you have any account6 ? <Link to='/signup' className="text-blue-500">Sing up</Link></p>
           </div>
 
           <button
@@ -66,7 +97,7 @@ const  Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default  Login;
+export default Login

@@ -1,11 +1,30 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
+import { AuthContext } from "../../Provider/AuthProvider"
+import Swal from "sweetalert2"
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { user, logOut } = useContext(AuthContext)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
+  }
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: " Sign-out successful.",
+          showConfirmButton: false,
+          timer: 1000,
+        })
+      })
+      .catch((error) => {
+        console.log("Log out error", error)
+      })
   }
 
   return (
@@ -67,9 +86,25 @@ const NavBar = () => {
           {/* User Profile */}
           <div className="hidden sm:block sm:ml-6">
             <div className="flex items-center">
-              <NavLink to="/login" className="text-white">
-                Login
-              </NavLink>
+              {!user ? (
+                <NavLink to="/login" className="text-white">
+                  Login
+                </NavLink>
+              ) : (
+                <div className="flex gap-8 items-center">
+                  <button className="text-white">Dashboard </button>
+                 <div>
+                 <NavLink onClick={handleLogOut} to="/" className="text-white">
+                    Logout
+                  </NavLink>
+                 </div>
+                  <div className="avatar">
+                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={user.photoURL} />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

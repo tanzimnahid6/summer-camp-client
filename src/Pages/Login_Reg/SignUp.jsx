@@ -1,22 +1,64 @@
-
-
-
-import { useForm } from 'react-hook-form';
+import { useContext } from "react"
+import { useForm } from "react-hook-form"
+import { FcGoogle } from "react-icons/fc"
+import { AuthContext } from "../../Provider/AuthProvider"
+import Swal from "sweetalert2"
+import { Link } from "react-router-dom"
 
 const SignUp = () => {
+  const { createUser, loginGoogle,  updateUserProfile} = useContext(AuthContext)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data); // Handle form submission data
-  };
+    console.log(data) // Handle form submission data
+
+    //update user profile  
+
+    createUser(data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log(user)
+        updateUserProfile(data.name, data.image)
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "User create successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        })
+      })
+      .catch((error) => {
+        console.log("create user error", error)
+      })
+      
+  }
+
+  //login with google ====================================
+  const googleLogin = () => {
+    loginGoogle()
+      .then((result) => {
+        const user = result.user
+        console.log(user)
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "User create successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold text-center mb-4">Please Sign Up</h2>
+    <div className="container max-w-lg mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold text-center mb-4">SIGN UP</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label htmlFor="name" className="block mb-2">
@@ -25,13 +67,15 @@ const SignUp = () => {
           <input
             type="text"
             id="name"
-            {...register('name', { required: true })}
+            {...register("name", { required: true })}
             className={`w-full px-3 py-2 border ${
-              errors.name ? 'border-red-500' : 'border-gray-300'
+              errors.name ? "border-red-500" : "border-gray-300"
             } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
           {errors.name && (
-            <span className="text-red-500 text-sm mt-1">Please enter your name</span>
+            <span className="text-red-500 text-sm mt-1">
+              Please enter your name
+            </span>
           )}
         </div>
 
@@ -42,65 +86,76 @@ const SignUp = () => {
           <input
             type="email"
             id="email"
-            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             className={`w-full px-3 py-2 border ${
-              errors.email ? 'border-red-500' : 'border-gray-300'
+              errors.email ? "border-red-500" : "border-gray-300"
             } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
           {errors.email && (
-            <span className="text-red-500 text-sm mt-1">Please enter a valid email address</span>
+            <span className="text-red-500 text-sm mt-1">
+              Please enter a valid email address
+            </span>
           )}
         </div>
-
+        {/* TODO:password type change */}
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2">
             Password
           </label>
           <input
-            type="password"
+            type="text"
             id="password"
-            {...register('password', {
-              required: true,
-              minLength: 8,
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/,
-            })}
+            defaultValue={"!4aASDFWF"}
+            {...register("password", { required: true, minLength: 8 })}
             className={`w-full px-3 py-2 border ${
-              errors.password ? 'border-red-500' : 'border-gray-300'
+              errors.password ? "border-red-500" : "border-gray-300"
             } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
           {errors.password && (
             <span className="text-red-500 text-sm mt-1">
-              Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+              Password must be at least 8 characters long
             </span>
           )}
         </div>
 
         <div className="mb-4">
           <label htmlFor="image" className="block mb-2">
-            Image
+            Image Link
           </label>
           <input
-            type="file"
+            type="text"
             id="image"
-            {...register('image', { required: true })}
-            className={`w-full ${
-              errors.image ? 'border-red-500' : 'border-gray-300'
-            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            {...register("image", { required: true })}
+            className={`w-full px-3 py-2 border ${
+              errors.image ? "border-red-500" : "border-gray-300"
+            } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
           {errors.image && (
-            <span className="text-red-500 text-sm mt-1">Please upload an image</span>
+            <span className="text-red-500 text-sm mt-1">
+              Please enter the image link
+            </span>
           )}
         </div>
+        <div className="my-4 ">
+            <p>Already have an account ? <Link to='/login' className="text-blue-500">Login</Link></p>
+          </div>
 
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
         >
-          Sign Up
+          sign up
         </button>
       </form>
-    </div>
-  );
-};
+      <hr />
 
-export default SignUp;
+      <div className="text-center my-4">
+        <button onClick={googleLogin} className="btn btn-outline ">
+          Login with google <FcGoogle size={20}></FcGoogle>{" "}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default SignUp
