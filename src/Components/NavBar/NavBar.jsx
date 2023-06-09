@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
 import Swal from "sweetalert2"
 
@@ -92,7 +92,7 @@ const NavBar = () => {
                 </NavLink>
               ) : (
                 <div className="flex gap-8 items-center">
-                  <button className="">Dashboard </button>
+                  <Link to="/dashBoard" className="">Dashboard </Link>
                  <div>
                  <NavLink onClick={handleLogOut} to="/" className="">
                     Logout
