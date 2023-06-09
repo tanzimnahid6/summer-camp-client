@@ -28,7 +28,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className=" absolute   bg-transparent z-10 w-full text-xl font-bold">
+    <nav className=" absolute top-0   bg-transparent z-10 w-full text-xl font-bold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -92,9 +92,9 @@ const NavBar = () => {
                 </NavLink>
               ) : (
                 <div className="flex gap-8 items-center">
-                  <button className="text-white">Dashboard </button>
+                  <button className="">Dashboard </button>
                  <div>
-                 <NavLink onClick={handleLogOut} to="/" className="text-white">
+                 <NavLink onClick={handleLogOut} to="/" className="">
                     Logout
                   </NavLink>
                  </div>
@@ -116,19 +116,19 @@ const NavBar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1">
             <NavLink
               to="/menu1"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
+              className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               Menu 1
             </NavLink>
             <NavLink
               to="/menu2"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
+              className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               Menu 2
             </NavLink>
             <NavLink
               to="/menu3"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
+              className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               Menu 3
             </NavLink>
@@ -137,7 +137,7 @@ const NavBar = () => {
           <div className="px-4 py-5 border-t border-gray-800">
             <div className="flex items-center">
               <div className="ml-3">
-                <div className="text-base font-medium leading-none text-white">
+                <div className="text-base font-medium leading-none ">
                   User Profile
                 </div>
                 <div className="mt-1 text-sm font-medium leading-none text-gray-400">

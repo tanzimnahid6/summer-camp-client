@@ -4,9 +4,10 @@ import { FcGoogle } from "react-icons/fc"
 import { AuthContext } from "../../Provider/AuthProvider"
 import Swal from "sweetalert2"
 import { Link } from "react-router-dom"
+import { saveUser } from "../../util/Auth"
 
 const SignUp = () => {
-  const { createUser, loginGoogle,  updateUserProfile} = useContext(AuthContext)
+  const { createUser, loginGoogle, updateUserProfile } = useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -14,17 +15,25 @@ const SignUp = () => {
   } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data) // Handle form submission data
+    console.log(data)
 
-    //update user profile  
-
+    //create user and update user profile
     createUser(data.email, data.password)
       .then((userCredential) => {
+        //update user profile
+        console.log(userCredential.user);
+        saveUser(userCredential?.user)
+        updateUserProfile(data.name, data.image)
+        .then(() => {
+        
+          // saveUser(userCredential?.user)
+        })
+        
         const user = userCredential.user
         console.log(user)
-        updateUserProfile(data.name, data.image)
+
         Swal.fire({
-          position: "top-center",
+          position: "top",
           icon: "success",
           title: "User create successfully",
           showConfirmButton: false,
@@ -34,7 +43,6 @@ const SignUp = () => {
       .catch((error) => {
         console.log("create user error", error)
       })
-      
   }
 
   //login with google ====================================
@@ -42,7 +50,15 @@ const SignUp = () => {
     loginGoogle()
       .then((result) => {
         const user = result.user
-        console.log(user)
+        saveUser(user)
+        const { displayName, email, photoURL } = user
+        const userInfo = {
+          displayName,
+          email,
+          photoURL,
+        }
+        console.log(userInfo)
+
         Swal.fire({
           position: "top",
           icon: "success",
@@ -57,7 +73,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="container max-w-lg mx-auto px-4 py-8">
+    <div className="container max-w-lg mx-auto px-4 pt-24 py-8">
       <h2 className="text-2xl font-bold text-center mb-4">SIGN UP</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
@@ -137,8 +153,13 @@ const SignUp = () => {
           )}
         </div>
         <div className="my-4 ">
-            <p>Already have an account ? <Link to='/login' className="text-blue-500">Login</Link></p>
-          </div>
+          <p>
+            Already have an account ?{" "}
+            <Link to="/login" className="text-blue-500">
+              Login
+            </Link>
+          </p>
+        </div>
 
         <button
           type="submit"

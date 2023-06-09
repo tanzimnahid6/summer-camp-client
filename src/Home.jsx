@@ -1,5 +1,6 @@
 import BannerSlider from "./Components/Banner/BannerSlider"
 import PopularClass from "./Components/PopularClass/PopularClass"
+import PopularInstructor from "./Components/PopularInstructor/PopularInstractor"
 import SectionTitle from "./Components/SectionTitle"
 
 const Home = () => {
@@ -14,6 +15,13 @@ const Home = () => {
       ></SectionTitle>
       <div>
         <PopularClass></PopularClass>
+      </div>
+      <div>
+        <SectionTitle
+          heading={"Popular Instructors"}
+          sub_heading={"this is popular instructor section ,added letter"}
+        ></SectionTitle>
+        <PopularInstructor></PopularInstructor>
       </div>
     </div>
   )

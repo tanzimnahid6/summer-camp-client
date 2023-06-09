@@ -1,11 +1,10 @@
 const ClassCard = ({ item }) => {
-  console.log(item)
   return (
     <div>
       <div className="card w-96 h-[500px] bg-base-100 shadow-2xl">
         <figure>
           <img
-            className="h-80 w-72 rounded-lg"
+            className="h-80 w-72 rounded-lg object-cover"
             src={item.picture}
             alt="Shoes"
           />

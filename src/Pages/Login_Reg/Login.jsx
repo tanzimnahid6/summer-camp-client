@@ -1,41 +1,32 @@
-import { createContext } from "react"
+import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import { AuthContext } from "../../Provider/AuthProvider"
-import Swal from "sweetalert2"
+
 import { Link } from "react-router-dom"
 
 const Login = () => {
-  const { signIn } = createContext(AuthContext)
+  const { signIn } = useContext(AuthContext)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
-  
 
   const onSubmit = (data) => {
-    console.log(data)
-  
     signIn(data.email, data.password)
-    .then((userCredential) => {
-      const user = userCredential.user
-      console.log(user)
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Login User successfully",
-        showConfirmButton: false,
-        timer: 1000,
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log(user);
+      
       })
-    })
-    .catch((error) => {
-      console.log("create user error", error)
-    })
+      .catch((error) => {
+        console.log("create user error", error)
+      })
   }
 
   return (
-    <div className="flex justify-center items-center mt-12 bg-gray-100">
+    <div className="flex justify-center items-center pt-28 ">
       <div className="bg-white shadow-lg rounded p-8 max-w-sm w-full">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +76,12 @@ const Login = () => {
             )}
           </div>
           <div className="my-4 ">
-            <p>Do you have any account6 ? <Link to='/signup' className="text-blue-500">Sing up</Link></p>
+            <p>
+              Do you have any account6 ?{" "}
+              <Link to="/signup" className="text-blue-500">
+                Sing up
+              </Link>
+            </p>
           </div>
 
           <button
