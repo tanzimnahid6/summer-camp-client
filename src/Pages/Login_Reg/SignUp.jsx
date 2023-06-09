@@ -25,8 +25,7 @@ const SignUp = () => {
         saveUser(userCredential?.user)
         updateUserProfile(data.name, data.image)
         .then(() => {
-        
-          // saveUser(userCredential?.user)
+    
         })
         
         const user = userCredential.user
@@ -51,13 +50,8 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user
         saveUser(user)
-        const { displayName, email, photoURL } = user
-        const userInfo = {
-          displayName,
-          email,
-          photoURL,
-        }
-        console.log(userInfo)
+        console.log(user);
+        updateUserProfile(user?.displayName, user?.photoURL )
 
         Swal.fire({
           position: "top",

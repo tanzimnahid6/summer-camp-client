@@ -32,17 +32,27 @@ const DashBoard = () => {
         <ul className="menu p-4 w-80 h-full    text-base-content">
           {/* Sidebar content here */}
           <div>
+          {/* Student */}
             <li>
-              <Link>Sidebar Item 1</Link>
+              <Link>My Select class</Link>
             </li>
             <li>
-              <Link>Sidebar Item 1</Link>
+              <Link>My Enrolled Classes</Link>
+            </li>
+
+            {/* Instructor */}
+            <li>
+              <Link>Add a Class</Link>
             </li>
             <li>
-              <Link>Sidebar Item 3</Link>
+              <Link>My Classes</Link>
+            </li>
+            {/* Admin */}
+            <li>
+              <Link>Manage Classes:</Link>
             </li>
             <li>
-              <Link>Sidebar Item 4</Link>
+              <Link>Manage Users</Link>
             </li>
           </div>
           <hr />

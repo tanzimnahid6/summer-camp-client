@@ -28,7 +28,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className=" absolute top-0   bg-transparent z-10 w-full text-xl font-bold">
+    <nav className="   bg-transparent  text-xl font-bold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -69,7 +69,7 @@ const NavBar = () => {
                 Home
               </NavLink>
               <NavLink
-                to="/"
+                to="/instructor"
                 className=" px-3 py-2 rounded-md  font-medium"
               >
                 Instructors
