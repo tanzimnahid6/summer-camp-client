@@ -37,27 +37,27 @@ const DashBoard = () => {
             {/* Student */}
             <p className="text-2xl">Student-----------</p>
             <li>
-              <Link>My Select class</Link>
+              <Link to="/dashBoard/selectClass">My Select class</Link>
             </li>
             <li>
-              <Link>My Enrolled Classes</Link>
+              <Link to="/dashBoard/enrolledClass">My Enrolled Classes</Link>
             </li>
 
             {/* Instructor */}
             <p className="text-2xl">Instructor-----------</p>
             <li>
-              <Link>Add a Class</Link>
+              <Link to="/dashBoard/addClass">Add a Class</Link>
             </li>
             <li>
-              <Link>My Classes</Link>
+              <Link to="/dashBoard/myClass">My Classes</Link>
             </li>
             {/* Admin */}
             <p className="text-2xl">Admin-----------</p>
             <li>
-              <Link to="/dashBoard/adminManage">Manage Classes:</Link>
+              <Link to="/dashBoard/adminManageClass">Manage Classes:</Link>
             </li>
             <li>
-              <Link>Manage Users</Link>
+              <Link to="/dashBoard/adminManageUser">Manage Users</Link>
             </li>
           </div>
           <hr />

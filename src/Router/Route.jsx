@@ -8,6 +8,11 @@ import PrivetRoute from "./PrivetRoute"
 import Instructor from "../Pages/Instructor/Instructor"
 import Classes from "../Pages/Classes/Classes"
 import ManageClass from "../Pages/DashBoard/Admin/ManageClass"
+import MangeUser from "../Pages/DashBoard/Admin/MangeUser"
+import AddClass from "../Pages/DashBoard/Instructor/AddClass"
+import InstructorClass from "../Pages/DashBoard/Instructor/InstructorClass"
+import Enrolled from "../Pages/DashBoard/Student/Enrolled"
+import SelectClass from "../Pages/DashBoard/Student/SelectClass"
 
 const router = createBrowserRouter([
   {
@@ -45,8 +50,29 @@ const router = createBrowserRouter([
     ),
     children:[
         {
-            path:'adminManage',
+            path:'adminManageClass',
             element:<ManageClass></ManageClass>
+        },
+        {
+            path:'adminManageUser',
+            element:<MangeUser></MangeUser>
+        },
+        {
+            path:'addClass',
+            element:<AddClass></AddClass>
+        },
+        {
+            path:'myClass',
+            element:<InstructorClass></InstructorClass>
+        }
+        ,
+        {
+            path:'selectClass',
+            element:<SelectClass></SelectClass>
+        },
+        {
+            path:'enrolledClass',
+            element:<Enrolled></Enrolled>
         }
     ]
   },
