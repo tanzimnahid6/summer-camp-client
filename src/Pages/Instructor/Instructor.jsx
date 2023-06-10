@@ -2,7 +2,7 @@
 
 const Instructor = () => {
     return (
-        <div className="pt-12" >
+        <div className="pt-12">
             <h1>This is instructor page</h1>
         </div>
     );

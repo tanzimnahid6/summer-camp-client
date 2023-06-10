@@ -8,6 +8,7 @@ const useUsers = () => {
             return res.json()
         }
     })
+    
     return [users, loading, refetch]
 };
 export default useUsers;

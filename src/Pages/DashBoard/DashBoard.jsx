@@ -1,9 +1,12 @@
 import { useContext } from "react"
 import { Link, Outlet } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
+import useRole from "../../Hooks/useRole"
 
 const DashBoard = () => {
   const { user } = useContext(AuthContext)
+  const role = useRole()
+  console.log(role)
 
   return (
     <div className="drawer lg:drawer-open">
@@ -34,31 +37,41 @@ const DashBoard = () => {
         <ul className="menu p-4 w-80 h-full    text-base-content">
           {/* Sidebar content here */}
           <div>
-            {/* Student */}
-            <p className="text-2xl">Student-----------</p>
-            <li>
-              <Link to="/dashBoard/selectClass">My Select class</Link>
-            </li>
-            <li>
-              <Link to="/dashBoard/enrolledClass">My Enrolled Classes</Link>
-            </li>
-
-            {/* Instructor */}
-            <p className="text-2xl">Instructor-----------</p>
-            <li>
-              <Link to="/dashBoard/addClass">Add a Class</Link>
-            </li>
-            <li>
-              <Link to="/dashBoard/myClass">My Classes</Link>
-            </li>
             {/* Admin */}
-            <p className="text-2xl">Admin-----------</p>
-            <li>
-              <Link to="/dashBoard/adminManageClass">Manage Classes:</Link>
-            </li>
-            <li>
-              <Link to="/dashBoard/adminManageUser">Manage Users</Link>
-            </li>
+            {role == "admin" && (
+              <>
+                <li>
+                  <Link to="/dashBoard/adminManageClass">Manage Classes:</Link>
+                </li>
+                <li>
+                  <Link to="/dashBoard/adminManageUser">Manage Users</Link>
+                </li>
+              </>
+            )}
+            {/* Instructor */}
+            {role == "instructor" && (
+              <>
+                <p className="text-2xl">Instructor-----------</p>
+                <li>
+                  <Link to="/dashBoard/addClass">Add a Class</Link>
+                </li>
+                <li>
+                  <Link to="/dashBoard/myClass">My Classes</Link>
+                </li>
+              </>
+            )}
+            {/* Student */}
+            {role == "student" && (
+              <>
+                <p className="text-2xl">Student-----------</p>
+                <li>
+                  <Link to="/dashBoard/selectClass">My Select class</Link>
+                </li>
+                <li>
+                  <Link to="/dashBoard/enrolledClass">My Enrolled Classes</Link>
+                </li>
+              </>
+            )}
           </div>
           <hr />
           <div>
