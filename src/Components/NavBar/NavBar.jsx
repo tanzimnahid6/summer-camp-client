@@ -75,7 +75,7 @@ const NavBar = () => {
                 Instructors
               </NavLink>
               <NavLink
-                to="/"
+                to="/classes"
                 className=" px-3 py-2 rounded-md  font-medium"
               >
                 Classes

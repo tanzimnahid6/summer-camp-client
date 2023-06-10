@@ -6,6 +6,8 @@ import SignUp from "../Pages/Login_Reg/SignUp"
 import DashBoard from "../Pages/DashBoard/DashBoard"
 import PrivetRoute from "./PrivetRoute"
 import Instructor from "../Pages/Instructor/Instructor"
+import Classes from "../Pages/Classes/Classes"
+import ManageClass from "../Pages/DashBoard/Admin/ManageClass"
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
       {
         path:'instructor',
         element:<Instructor></Instructor>
+      },
+      {
+        path:'classes',
+        element:<Classes></Classes>
       }
     ],
   },
@@ -37,6 +43,12 @@ const router = createBrowserRouter([
         <DashBoard></DashBoard>
       </PrivetRoute>
     ),
+    children:[
+        {
+            path:'adminManage',
+            element:<ManageClass></ManageClass>
+        }
+    ]
   },
 ])
 export default router

@@ -2,10 +2,13 @@ import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import { AuthContext } from "../../Provider/AuthProvider"
 
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 const Login = () => {
   const { signIn } = useContext(AuthContext)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || "/"
 
   const {
     register,
@@ -18,6 +21,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user
         console.log(user);
+        navigate(from, { replace: true })
       
       })
       .catch((error) => {

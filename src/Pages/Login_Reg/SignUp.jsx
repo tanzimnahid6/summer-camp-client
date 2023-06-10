@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { FcGoogle } from "react-icons/fc"
 import { AuthContext } from "../../Provider/AuthProvider"
 import Swal from "sweetalert2"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { saveUser } from "../../util/Auth"
 
 const SignUp = () => {
@@ -13,6 +13,9 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || "/"
 
   const onSubmit = (data) => {
     console.log(data)
@@ -25,6 +28,7 @@ const SignUp = () => {
         saveUser(userCredential?.user)
         updateUserProfile(data.name, data.image)
         .then(() => {
+          navigate(from, { replace: true })
     
         })
         
@@ -52,6 +56,8 @@ const SignUp = () => {
         saveUser(user)
         console.log(user);
         updateUserProfile(user?.displayName, user?.photoURL )
+
+        navigate(from, { replace: true })
 
         Swal.fire({
           position: "top",
