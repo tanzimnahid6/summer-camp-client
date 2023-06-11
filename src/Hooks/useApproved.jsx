@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-
-
 const useApproved = () => {
     const {data:approvedClass=[],isLoading:loading,refetch} = useQuery({
         queryKey:["approvedClass"],
