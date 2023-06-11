@@ -8,11 +8,9 @@ import Swal from "sweetalert2"
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
 
 const AddClass = () => {
-  console.log(img_hosting_token)
   const { user } = useContext(AuthContext)
-
   const userEmail = user?.email
-
+  const userName = user?.displayName;
   const {
     register,
     handleSubmit,
@@ -24,8 +22,6 @@ const AddClass = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
   const onSubmit = (data) => {
-    console.log(data)
-
     //uploading image=================================================================
     const formData = new FormData()
     formData.append("image", data.picture[0])
@@ -63,6 +59,7 @@ const AddClass = () => {
             instructor_popularity,
             name,
             picture: imgURL,
+            status:"pending"
           }
 
           //upload data in to database==========================================
@@ -95,10 +92,11 @@ const AddClass = () => {
         <div>
           <div className="mb-4">
             <label htmlFor="name" className="block font-medium mb-1">
-              Name
+              Class Name
             </label>
             <input
-              type="text"
+             type="text"
+              
               id="name"
               {...register("name", { required: true })}
               className="border border-gray-300 rounded-md p-2 w-full"
@@ -146,6 +144,9 @@ const AddClass = () => {
             </label>
             <input
               type="text"
+              readOnly
+              
+              defaultValue={userName}
               id="instructor_name"
               {...register("instructor_name", { required: true })}
               className="border border-gray-300 rounded-md p-2 w-full"
@@ -208,6 +209,7 @@ const AddClass = () => {
             </label>
             <input
               type="email"
+              readOnly
               defaultValue={userEmail}
               id="instructor_email"
               {...register("instructor_email", { required: true })}
