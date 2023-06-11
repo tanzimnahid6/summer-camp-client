@@ -6,7 +6,7 @@ import useRole from "../../Hooks/useRole"
 const DashBoard = () => {
   const { user } = useContext(AuthContext)
   const role = useRole()
-  console.log(role)
+//   console.log(role)
 
   return (
     <div className="drawer lg:drawer-open">
@@ -38,7 +38,7 @@ const DashBoard = () => {
           {/* Sidebar content here */}
           <div>
             {/* Admin */}
-            {role == "admin" && (
+            {role === "admin" && (
               <>
                 <li>
                   <Link to="/dashBoard/adminManageClass">Manage Classes:</Link>
@@ -49,9 +49,9 @@ const DashBoard = () => {
               </>
             )}
             {/* Instructor */}
-            {role == "instructor" && (
+            {role === "instructor" && (
               <>
-                <p className="text-2xl">Instructor-----------</p>
+              
                 <li>
                   <Link to="/dashBoard/addClass">Add a Class</Link>
                 </li>
@@ -61,9 +61,10 @@ const DashBoard = () => {
               </>
             )}
             {/* Student */}
-            {role == "student" && (
+            {/* {!role then->} */}
+            {role === "student" && (
               <>
-                <p className="text-2xl">Student-----------</p>
+                
                 <li>
                   <Link to="/dashBoard/selectClass">My Select class</Link>
                 </li>

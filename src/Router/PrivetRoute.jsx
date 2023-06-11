@@ -19,6 +19,7 @@ const PrivetRout = ({children}) => {
         return <Navigate state={{ from: location }} replace to="/login"></Navigate>
     }
     return (
+        
         <div>
             {children}
         </div>

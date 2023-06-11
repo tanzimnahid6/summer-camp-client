@@ -1,20 +1,91 @@
 import { useForm } from "react-hook-form"
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { useContext } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { useContext } from "react"
+import { AuthContext } from "../../../Provider/AuthProvider"
+import { convertData } from "../../../util/convertDate"
+import Swal from "sweetalert2"
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
 
 const AddClass = () => {
-    const {user} = useContext(AuthContext)
-    
-    const userEmail = user?.email
-   
-    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
-    const startingDate = watch('starting_date');
+  console.log(img_hosting_token)
+  const { user } = useContext(AuthContext)
+
+  const userEmail = user?.email
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm()
+  const startingDate = watch("starting_date")
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
   const onSubmit = (data) => {
     console.log(data)
-    // You can perform further actions with the form data here, such as sending it to a server
+
+    //uploading image=================================================================
+    const formData = new FormData()
+    formData.append("image", data.picture[0])
+    fetch(img_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        console.log(imgResponse)
+        if (imgResponse.success) {
+          const imgURL = imgResponse.data.display_url
+
+          const {
+            available_seats,
+            price,
+            rating,
+            starting_date,
+            description,
+            instructor_email,
+            instructor_image,
+            instructor_name,
+            instructor_popularity,
+            name,
+          } = data
+          const newClass = {
+            available_seats: parseInt(available_seats),
+            price: parseFloat(price),
+            rating: parseFloat(rating),
+            starting_date: convertData(starting_date),
+            description,
+            instructor_email,
+            instructor_image,
+            instructor_name,
+            instructor_popularity,
+            name,
+            picture: imgURL,
+          }
+
+          //upload data in to database==========================================
+          fetch(`http://localhost:5000/allClass`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newClass),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result)
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "New Class added successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+            })
+        }
+      })
   }
 
   return (
@@ -38,15 +109,21 @@ const AddClass = () => {
           </div>
 
           <div className="mb-4">
-          <label htmlFor="starting_date" className="block font-medium mb-1">Starting Date</label>
-          <DatePicker
-            id="starting_date"
-            selected={startingDate ? new Date(startingDate) : null}
-            onChange={(date) => setValue('starting_date', date, { shouldValidate: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
-          />
-          {errors.starting_date && <span className="text-red-500">Starting date is required</span>}
-        </div>
+            <label htmlFor="starting_date" className="block font-medium mb-1">
+              Starting Date
+            </label>
+            <DatePicker
+              id="starting_date"
+              selected={startingDate ? new Date(startingDate) : null}
+              onChange={(date) =>
+                setValue("starting_date", date, { shouldValidate: true })
+              }
+              className="border border-gray-300 rounded-md p-2 w-full"
+            />
+            {errors.starting_date && (
+              <span className="text-red-500">Starting date is required</span>
+            )}
+          </div>
 
           <div className="mb-4">
             <label htmlFor="available_seats" className="block font-medium mb-1">
