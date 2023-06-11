@@ -59,7 +59,8 @@ const AddClass = () => {
             instructor_popularity,
             name,
             picture: imgURL,
-            status:"pending"
+            status:"pending",
+            enrolled_classes:parseFloat(0) 
           }
 
           //upload data in to database==========================================
