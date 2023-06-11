@@ -86,10 +86,10 @@ const AddClass = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Culinary School Registration</h1>
-      <form className="flex w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <div>
+    <div className="w-[800px] mx-auto   ">
+     <h1 className="text-4xl text-center mb-8 font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">ADD A NEW CLASS</h1>
+      <form className="flex w-full gap-4 border-2 p-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="w-full">
           <div className="mb-4">
             <label htmlFor="name" className="block font-medium mb-1">
               Class Name
@@ -199,7 +199,7 @@ const AddClass = () => {
           </div>
         </div>
 
-        <div>
+        <div className="w-full">
           <div className="mb-4">
             <label
               htmlFor="instructor_email"
