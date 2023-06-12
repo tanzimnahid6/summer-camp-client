@@ -1,54 +1,66 @@
 import Swal from "sweetalert2"
 import useClass from "../../../Hooks/useClasses"
+import { useState } from "react"
+import FeedBackModal from "../../../Components/Modal/FeedBackModal"
 
 const ManageClass = () => {
-  const [classes,loading,refetch] = useClass()
-
-  const handleApproved = (id) => {
-    fetch(`http://localhost:5000/allClass/${id}`,{
-        method:"PATCH",
-        headers:{
-            "content-type":"application/json"
-        },
-        body:JSON.stringify({status:"approved"})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-       if(data.modifiedCount>0){
-        Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: 'Your status is updated',
-            showConfirmButton: false,
-            timer: 1500
-          })
-       }
-        refetch()
-    })
+  const [classes, loading, refetch] = useClass()
+  // const [isOpen,setIsOpen] = useState(false)
+  const [modal, setModal] = useState(false)
+  const [id, setId] = useState(null)
+  const modalHandler = (id) => {
+    setModal(true)
+    console.log(id)
+    setId(id)
+  }
+  const closeModal = () => {
+    setModal(false)
   }
 
-  const handleDeny = (id) =>{
-    fetch(`http://localhost:5000/allClass/${id}`,{
-        method:"PATCH",
-        headers:{
-            "content-type":"application/json"
-        },
-        body:JSON.stringify({status:"pending"})
+  const handleApproved = (id) => {
+    fetch(`http://localhost:5000/allClass/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "approved" }),
     })
-    .then(res=>res.json())
-    .then(data=>{
-       if(data.modifiedCount>0){
-        Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: 'Your status is updated',
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Your status is updated",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           })
-       }
+        }
         refetch()
-    })
+      })
+  }
 
+  const handleDeny = (id) => {
+    fetch(`http://localhost:5000/allClass/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "pending" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Your status is updated",
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        }
+        refetch()
+      })
   }
   if (loading == true) {
     return (
@@ -116,10 +128,16 @@ const ManageClass = () => {
                     >
                       Approved
                     </button>
-                    <button onClick={()=>handleDeny(item._id)} className={`btn  btn-xs  btn-outline`}>
+                    <button
+                      onClick={() => handleDeny(item._id)}
+                      className={`btn  btn-xs  btn-outline`}
+                    >
                       Denied
                     </button>
-                    <button className={`btn  btn-xs  btn-outline`}>
+                    <button
+                      onClick={() => modalHandler(item._id)}
+                      className={`btn  btn-xs  btn-outline`}
+                    >
                       Feedback
                     </button>
                   </td>
@@ -129,6 +147,12 @@ const ManageClass = () => {
           </table>
         </div>
       </div>
+      <FeedBackModal
+        id={id}
+        modalHandler={modalHandler}
+        isOpen={modal}
+        closeModal={closeModal}
+      ></FeedBackModal>
     </div>
   )
 }
