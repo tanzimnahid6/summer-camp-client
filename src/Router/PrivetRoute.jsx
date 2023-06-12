@@ -7,6 +7,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 // eslint-disable-next-line react/prop-types
 const PrivetRout = ({children}) => {
     const { user,loading} = useContext(AuthContext)
+
     const location = useLocation()
     if(loading){
         return (
@@ -15,6 +16,7 @@ const PrivetRout = ({children}) => {
             </div>
         )
     }
+    
     if(!user){
         return <Navigate state={{ from: location }} replace to="/login"></Navigate>
     }

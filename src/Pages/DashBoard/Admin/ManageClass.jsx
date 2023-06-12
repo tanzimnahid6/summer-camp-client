@@ -6,7 +6,7 @@ import FeedBackModal from "../../../Components/Modal/FeedBackModal"
 
 const ManageClass = () => {
   const [classes, loading, refetch] = useClass()
-  // const [isOpen,setIsOpen] = useState(false)
+
   const [modal, setModal] = useState(false)
   const [id, setId] = useState(null)
   const modalHandler = (id) => {

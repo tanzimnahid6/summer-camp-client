@@ -7,7 +7,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { saveUser } from "../../util/Auth"
 
 const SignUp = () => {
-  const { createUser, loginGoogle, updateUserProfile } = useContext(AuthContext)
+  const { createUser, loginGoogle, updateUserProfile,setLoading,loginUsers } = useContext(AuthContext)
+  console.log(loginUsers);
   const {
     register,
     handleSubmit,
@@ -24,7 +25,6 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((userCredential) => {
         //update user profile
-        console.log(userCredential.user);
         saveUser(userCredential?.user)
         updateUserProfile(data.name, data.image)
         .then(() => {
@@ -53,11 +53,21 @@ const SignUp = () => {
     loginGoogle()
       .then((result) => {
         const user = result.user
-        saveUser(user)
+        
         console.log(user);
+        console.log(user.email);
+
         updateUserProfile(user?.displayName, user?.photoURL )
 
+        const isExist = loginUsers.find(item=>item.email===user?.email)
+        console.log(isExist);
+        const newUser = {email:isExist.email,role:isExist.role}
+        if(!isExist){
+          saveUser(newUser)
+        }
+
         navigate(from, { replace: true })
+        setLoading(false)
 
         Swal.fire({
           position: "top",

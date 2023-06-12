@@ -3,16 +3,17 @@ import { Link, Outlet } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
 import useRole from "../../Hooks/useRole"
 
+
 const DashBoard = () => {
-  const { user,logOut } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext)
+  // console.log(user);
   const role = useRole()
-  // console.log(role)
-
-
-const signOut=()=>{
-  logOut()
-
-}
+  // const [role, loading, refetch] = useGetRole()
+  console.log(role)
+  
+  const signOut = () => {
+    logOut()
+  }
 
   return (
     <div className="drawer lg:drawer-open">
@@ -57,7 +58,6 @@ const signOut=()=>{
             {/* Instructor */}
             {role === "instructor" && (
               <>
-              
                 <li>
                   <Link to="/dashBoard/addClass">Add a Class</Link>
                 </li>
@@ -70,7 +70,6 @@ const signOut=()=>{
             {/* {!role then->} */}
             {role === "student" && (
               <>
-                
                 <li>
                   <Link to="/dashBoard/selectClass">My Select class</Link>
                 </li>
@@ -86,7 +85,7 @@ const signOut=()=>{
               <Link to="/">Home</Link>
             </li>
             <li>
-             <button onClick={signOut}>Log out</button>
+              <button onClick={signOut}>Log out</button>
             </li>
             <li>
               <Link>Settings</Link>

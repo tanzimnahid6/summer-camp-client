@@ -63,6 +63,7 @@ const router = createBrowserRouter([
         },
         {
             path:'myClass',
+            // path:'dashBoard',
             element:<InstructorClass></InstructorClass>
         }
         ,
