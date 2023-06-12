@@ -4,9 +4,15 @@ import { AuthContext } from "../../Provider/AuthProvider"
 import useRole from "../../Hooks/useRole"
 
 const DashBoard = () => {
-  const { user } = useContext(AuthContext)
+  const { user,logOut } = useContext(AuthContext)
   const role = useRole()
-//   console.log(role)
+  // console.log(role)
+
+
+const signOut=()=>{
+  logOut()
+
+}
 
   return (
     <div className="drawer lg:drawer-open">
@@ -80,7 +86,7 @@ const DashBoard = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link>Log Out</Link>
+             <button onClick={signOut}>Log out</button>
             </li>
             <li>
               <Link>Settings</Link>

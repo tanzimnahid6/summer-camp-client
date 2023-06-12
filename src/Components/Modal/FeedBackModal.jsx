@@ -25,7 +25,7 @@ const FeedBackModal = ({ closeModal, isOpen, id }) => {
           Swal.fire({
             position: "top",
             icon: "success",
-            title: "Your status is updated",
+            title: "Your Feedback is updated",
             showConfirmButton: false,
             timer: 1500,
           })

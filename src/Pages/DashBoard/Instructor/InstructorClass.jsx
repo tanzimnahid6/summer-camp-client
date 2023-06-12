@@ -52,7 +52,7 @@ const InstructorClass = () => {
                 <td>
                   <div>
                     {item.status} <br />
-                    {item?.feedback&& <span className="text-red-600">Feedback show here</span>}
+                    {item?.feedback&& <span className="text-red-600">{item.feedback&&item.feedback}</span>}
                   </div>
                 </td>
                 <td>{item.enrolled_classes}</td>
