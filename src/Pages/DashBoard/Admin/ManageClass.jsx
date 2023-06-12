@@ -3,6 +3,7 @@ import useClass from "../../../Hooks/useClasses"
 import { useState } from "react"
 import FeedBackModal from "../../../Components/Modal/FeedBackModal"
 
+
 const ManageClass = () => {
   const [classes, loading, refetch] = useClass()
   // const [isOpen,setIsOpen] = useState(false)
@@ -16,6 +17,8 @@ const ManageClass = () => {
   const closeModal = () => {
     setModal(false)
   }
+
+
 
   const handleApproved = (id) => {
     fetch(`http://localhost:5000/allClass/${id}`, {
@@ -152,6 +155,7 @@ const ManageClass = () => {
         modalHandler={modalHandler}
         isOpen={modal}
         closeModal={closeModal}
+        
       ></FeedBackModal>
     </div>
   )
