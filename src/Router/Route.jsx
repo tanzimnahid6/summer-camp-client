@@ -85,7 +85,7 @@ const router = createBrowserRouter([
             element:<Enrolled></Enrolled>
         },
         {
-          path:'payment',
+          path:'payment/:id',
           element:<Payment></Payment>
         }
     ]

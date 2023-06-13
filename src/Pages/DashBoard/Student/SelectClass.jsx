@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 
 const SelectClass = () => {
+    
   const { user } = useContext(AuthContext)
   const { data, refetch } = useDataByEmail(user?.email)
   console.log(data)
@@ -19,6 +20,9 @@ const SelectClass = () => {
         refetch()
       })
   }
+
+ 
+
   return (
     <div>
       <h1 className="text-4xl text-center mb-8 font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
@@ -69,7 +73,9 @@ const SelectClass = () => {
                     </button>
                   </th>
                   <th>
-                    <Link to='/dashBoard/payment' className="btn btn-error btn-sm">pay</Link>
+                    <Link to={`/dashBoard/payment/${item._id}`} className="btn btn-error btn-sm">pay</Link>
+                    {/* <Link  onClick={()=>sendPrice(item.price)} className="btn btn-error btn-sm">pay</Link> */}
+
                   </th>
                 </tr>
               ))}
