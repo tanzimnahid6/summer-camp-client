@@ -43,10 +43,10 @@ const DashBoard = () => {
             <div className="w-28 rounded-full">
               <img src={user?.photoURL} />
             </div>
-            <h1 className="font-bold text-2xl">{user?.displayName}</h1>
+            <h1 className="font-bold text-3xl">{user?.displayName}</h1>
           </div>
         </div>
-        <ul className="menu p-4 w-80 h-full    text-base-content">
+        <ul className="menu p-4 w-80 h-full text-2xl    text-base-content">
           {/* Sidebar content here */}
           <div>
             {/* Admin */}
@@ -81,6 +81,7 @@ const DashBoard = () => {
                 <li>
                   <Link to="/dashBoard/enrolledClass">My Enrolled Classes</Link>
                 </li>
+                <li><Link>Payment History</Link></li>
               </>
             )}
           </div>
@@ -90,8 +91,8 @@ const DashBoard = () => {
               <Link to="/"> <span><BiHome size={20}></BiHome></span>Home</Link>
               
             </li>
-            <li>
-              <button onClick={signOut}> <span><BiLogIn size={20}></BiLogIn></span> Log out</button>
+            <li onClick={signOut}>
+              <Link><span className="-ml-2"><BiLogIn size={24}></BiLogIn></span>Log Out</Link>
             </li>
             <li>
               <Link><span><AiFillSetting size={20}></AiFillSetting></span>Settings</Link>

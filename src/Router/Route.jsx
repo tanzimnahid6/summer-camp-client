@@ -13,11 +13,13 @@ import AddClass from "../Pages/DashBoard/Instructor/AddClass"
 import InstructorClass from "../Pages/DashBoard/Instructor/InstructorClass"
 import Enrolled from "../Pages/DashBoard/Student/Enrolled"
 import SelectClass from "../Pages/DashBoard/Student/SelectClass"
+import ErrorPage from "../Pages/ErrorPage"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

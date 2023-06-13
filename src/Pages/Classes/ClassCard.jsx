@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../Provider/AuthProvider"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
-import useDataByEmail from "../../Hooks/useDataByEmail "
+// import useDataByEmail from "../../Hooks/useDataByEmail "
 import useRole from "../../Hooks/useRole"
 
 const ClassCard = ({ item }) => {
@@ -11,23 +11,24 @@ const ClassCard = ({ item }) => {
   const role = useRole()
   // console.log(role);
   const isStudent = role === "student"
-
-  const { data, refetch } = useDataByEmail(user?.email)
-  console.log(data)
+  //get selected class by email===============================================
+  // const { data, refetch } = useDataByEmail(user?.email)
+  // console.log(data)
 
   const handleSelect = (item) => {
     console.log(item)
 
-    const isExits = data.find((d) => d._id === item._id  && d.userEmail==user?.email)
-    console.log(isExits)
-    if (isExits) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "This class already selected!",
-      })
-      return
-    }
+    // const isExits = data.find((d) => d._id === item._id  && d.userEmail==user?.email)
+
+    // console.log(isExits)
+    // if (isExits) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "This class already selected!",
+    //   })
+    //   return
+    // }
 
     if (!user) {
       Swal.fire({
@@ -45,19 +46,19 @@ const ClassCard = ({ item }) => {
       })
     } else {
       const newItem = {
-        ...item,
-        // available_seats: parseFloat(item.available_seats),
-        // description:item.description,
-        // enrolled_classes:parseFloat(item.enrolled_classes),
-        // instructor_email:item.instructor_email,
-        // instructor_image:item.instructor_image,
-        // instructor_name:item.instructor_name,
-        // instructor_popularity:item.instructor_popularity,
-        // name:item.name,
-        // picture:item.picture,
-        // price:parseFloat(item.price),
-        // rating:parseFloat(item.rating),
-        // status:item.status,
+        // ...item,
+        available_seats: parseFloat(item.available_seats),
+        description:item.description,
+        enrolled_classes:parseFloat(item.enrolled_classes),
+        instructor_email:item.instructor_email,
+        instructor_image:item.instructor_image,
+        instructor_name:item.instructor_name,
+        instructor_popularity:item.instructor_popularity,
+        name:item.name,
+        picture:item.picture,
+        price:parseFloat(item.price),
+        rating:parseFloat(item.rating),
+        status:item.status,
         userEmail: user?.email,
       }
       fetch(`http://localhost:5000/selectClass`, {
@@ -70,14 +71,23 @@ const ClassCard = ({ item }) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
-          refetch()
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your class has been saved",
-            showConfirmButton: false,
-            timer: 1500,
-          })
+          if (data.warning) {
+            Swal.fire({
+              position: "top",
+              icon: "error",
+              title: "Your data already exits",
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          }else{
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your class has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          }
         })
     }
   }
