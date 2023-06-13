@@ -55,6 +55,7 @@ const ClassCard = ({ item }) => {
         instructor_name:item.instructor_name,
         instructor_popularity:item.instructor_popularity,
         name:item.name,
+        starting_date:item.starting_date,
         picture:item.picture,
         price:parseFloat(item.price),
         rating:parseFloat(item.rating),

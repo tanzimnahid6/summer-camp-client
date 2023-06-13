@@ -2,6 +2,7 @@ import { useContext } from "react"
 import useDataByEmail from "../../../Hooks/useDataByEmail "
 import { AuthContext } from "../../../Provider/AuthProvider"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 
 const SelectClass = () => {
   const { user } = useContext(AuthContext)
@@ -68,7 +69,7 @@ const SelectClass = () => {
                     </button>
                   </th>
                   <th>
-                    <div className="btn btn-error btn-sm">pay</div>
+                    <Link to='/dashBoard/payment' className="btn btn-error btn-sm">pay</Link>
                   </th>
                 </tr>
               ))}
