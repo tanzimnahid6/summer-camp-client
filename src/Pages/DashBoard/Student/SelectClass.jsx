@@ -1,19 +1,20 @@
 import { useContext } from "react"
 import useDataByEmail from "../../../Hooks/useDataByEmail "
 import { AuthContext } from "../../../Provider/AuthProvider"
+import { motion } from "framer-motion"
 
 const SelectClass = () => {
   const { user } = useContext(AuthContext)
-  const { data,  refetch } = useDataByEmail(user?.email)
+  const { data, refetch } = useDataByEmail(user?.email)
   console.log(data)
   const handleDelete = (id) => {
-    console.log(id);
+    console.log(id)
     fetch(`http://localhost:5000/selectClass/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((d) => {
-        console.log(d);
+        console.log(d)
         refetch()
       })
   }
@@ -22,7 +23,11 @@ const SelectClass = () => {
       <h1 className="text-4xl text-center mb-8 font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
         MY SELECTED CLASS
       </h1>
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: "1rem" }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 1 }}
+      >
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -70,7 +75,7 @@ const SelectClass = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -1,7 +1,13 @@
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 const ClassCard = ({ item }) => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div>
-      <div className="card w-96 h-[500px] bg-base-100 shadow-2xl">
+      <div data-aos="fade-up" className="card w-96 h-[500px] bg-base-100 shadow-2xl">
         <figure>
           <img
             className="h-80 w-72 rounded-lg object-cover"
