@@ -3,6 +3,11 @@ import { Link, Outlet } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
 import useRole from "../../Hooks/useRole"
 
+import { BiHome, BiLogIn} from 'react-icons/bi';
+import { AiFillSetting} from 'react-icons/ai';
+
+
+
 
 const DashBoard = () => {
   const { user, logOut } = useContext(AuthContext)
@@ -67,7 +72,7 @@ const DashBoard = () => {
               </>
             )}
             {/* Student */}
-            {/* {!role then->} */}
+         
             {role === "student" && (
               <>
                 <li>
@@ -81,14 +86,15 @@ const DashBoard = () => {
           </div>
           <hr />
           <div>
-            <li>
-              <Link to="/">Home</Link>
+            <li >
+              <Link to="/"> <span><BiHome size={20}></BiHome></span>Home</Link>
+              
             </li>
             <li>
-              <button onClick={signOut}>Log out</button>
+              <button onClick={signOut}> <span><BiLogIn size={20}></BiLogIn></span> Log out</button>
             </li>
             <li>
-              <Link>Settings</Link>
+              <Link><span><AiFillSetting size={20}></AiFillSetting></span>Settings</Link>
             </li>
           </div>
         </ul>

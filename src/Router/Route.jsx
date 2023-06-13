@@ -49,6 +49,12 @@ const router = createBrowserRouter([
       </PrivetRoute>
     ),
     children:[
+      {
+        path:"",
+        element:<h1 className="text-7xl text-center mb-8 font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
+        Welcome to Dashboard
+      </h1>
+      },
         {
             path:'adminManageClass',
             element:<ManageClass></ManageClass>

@@ -34,7 +34,7 @@ const NavBar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <NavLink to="/" className="">
-              Your Logo
+              <img className="w-12 h-12 rounded-lg" src="./logo.jpg" alt="logo" />
             </NavLink>
           </div>
 

@@ -2,7 +2,6 @@ import useApproved from "../../Hooks/useApproved"
 
 import ClassCard from "./ClassCard"
 
-
 const Classes = () => {
   const [approvedClass, loading] = useApproved()
 

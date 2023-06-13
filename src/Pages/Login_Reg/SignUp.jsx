@@ -8,7 +8,7 @@ import { saveUser } from "../../util/Auth"
 
 const SignUp = () => {
   const { createUser, loginGoogle, updateUserProfile,setLoading,loginUsers } = useContext(AuthContext)
-  console.log(loginUsers);
+  // console.log(loginUsers);
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/"
 
   const onSubmit = (data) => {
-    console.log(data)
+    // console.log(data)
 
     //create user and update user profile
     createUser(data.email, data.password)
@@ -32,8 +32,8 @@ const SignUp = () => {
     
         })
         
-        const user = userCredential.user
-        console.log(user)
+        // const user = userCredential.user
+        // console.log(user)
 
         Swal.fire({
           position: "top",

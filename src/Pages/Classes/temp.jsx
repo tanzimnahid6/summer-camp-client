@@ -9,26 +9,28 @@ const ClassCard = ({ item }) => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
   const role = useRole()
-  // console.log(role);
-  const isStudent = role === "student"
+  console.log(role);
+ 
 
-  const { data, refetch } = useDataByEmail(user?.email)
-  console.log(data)
+
+  const { data, isLoading, error, refetch } = useDataByEmail(user?.email);
+ 
+  
 
   const handleSelect = (item) => {
-    console.log(item)
 
-    const isExits = data.find((d) => d._id === item._id  && d.userEmail==user?.email)
-    console.log(isExits)
-    if (isExits) {
+    const isExits = data.find(item=>item.userEmail==user?.email)
+    if(isExits){
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "This class already selected!",
+        position: 'top',
+        icon: 'success',
+        title: 'This item already selected',
+        showConfirmButton: false,
+        timer: 1500
       })
       return
     }
-
+    
     if (!user) {
       Swal.fire({
         title: "Are you select the class?",
@@ -44,22 +46,7 @@ const ClassCard = ({ item }) => {
         }
       })
     } else {
-      const newItem = {
-        ...item,
-        // available_seats: parseFloat(item.available_seats),
-        // description:item.description,
-        // enrolled_classes:parseFloat(item.enrolled_classes),
-        // instructor_email:item.instructor_email,
-        // instructor_image:item.instructor_image,
-        // instructor_name:item.instructor_name,
-        // instructor_popularity:item.instructor_popularity,
-        // name:item.name,
-        // picture:item.picture,
-        // price:parseFloat(item.price),
-        // rating:parseFloat(item.rating),
-        // status:item.status,
-        userEmail: user?.email,
-      }
+      const newItem = { ...item, userEmail: user?.email }
       fetch(`http://localhost:5000/selectClass`, {
         method: "POST",
         headers: {
@@ -72,13 +59,14 @@ const ClassCard = ({ item }) => {
           console.log(data)
           refetch()
           Swal.fire({
-            position: "top-end",
+            position: "top",
             icon: "success",
-            title: "Your class has been saved",
+            title: "Your work has been saved",
             showConfirmButton: false,
             timer: 1500,
           })
         })
+
     }
   }
   return (
@@ -99,7 +87,6 @@ const ClassCard = ({ item }) => {
             <button
               onClick={() => handleSelect(item)}
               className="btn btn-primary"
-              disabled={!isStudent}
             >
               Select
             </button>
