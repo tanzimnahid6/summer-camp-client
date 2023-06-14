@@ -2,8 +2,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../../Provider/AuthProvider"
 import Swal from "sweetalert2"
+import { convertData } from "../../../util/convertDate"
 
-const CheckOutForm = ({ price ,id}) => {
+
+const CheckOutForm = ({ price, id,name,picture }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [cardError, setCardError] = useState("")
@@ -16,7 +18,7 @@ const CheckOutForm = ({ price ,id}) => {
     fetch(`http://localhost:5000/create-payment-intent`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ price }),
+      body: JSON.stringify({ price:parseInt(price) }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -69,27 +71,35 @@ const CheckOutForm = ({ price ,id}) => {
       const transactionId = paymentIntent.id
       setTransactionId(transactionId)
 
-      //save payment information to server 
-      const payment = {email:user?.email,transactionId:transactionId,price,itemId:id}
-      fetch(`http://localhost:5000/payments`,{
-        method:"POST",
+      //save payment information to server
+      const payment = {
+        email: user?.email,
+        transactionId: transactionId,
+        price,
+        itemId: id,
+        date: convertData(new Date()),
+        name,
+        picture,
+        orderStatus: "pending",
+      }
+      fetch(`http://localhost:5000/payments`, {
+        method: "POST",
         headers: { "content-type": "application/json" },
-        body:JSON.stringify(payment)
-      }).then(res=>res.json()).then(data=>{
-        console.log(data);
-        if(data.insertedId){
-            Swal.fire({
-                position: "top",
-                icon: "success",
-                title: "Payment successfully done",
-                showConfirmButton: false,
-                timer: 1500,
-              })
-        }
+        body: JSON.stringify(payment),
       })
-
-
-
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          if (data.insertedId) {
+            Swal.fire({
+              position: "top",
+              icon: "success",
+              title: "Payment successfully done",
+              showConfirmButton: false,
+              timer: 1000,
+            })
+          }
+        })
     }
   }
 

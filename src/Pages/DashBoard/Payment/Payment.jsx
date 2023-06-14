@@ -13,14 +13,14 @@ const Payment = () => {
   const { data } = useDataByEmail(user?.email)
   const { id } = useParams()
   const needForPay = data?.find((item) => item._id === id)
-  const price = parseFloat(needForPay?.price)
+  const price = parseInt(needForPay?.price)
   console.log(price)
 
   return (
     <div className="w-[500px]">
       <h1>Payment here</h1>
       <Elements stripe={stripePromise}>
-        <CheckOutForm id={id} price={price}></CheckOutForm>
+        <CheckOutForm id={id} price={price} name={needForPay?.name} picture={needForPay?.picture}></CheckOutForm>
       </Elements>
     </div>
   )
