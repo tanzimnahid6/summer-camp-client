@@ -10,17 +10,32 @@ const SignUp = () => {
   const { createUser, loginGoogle, updateUserProfile, setLoading, loginUsers } =
     useContext(AuthContext)
   // console.log(loginUsers);
+  // const [confirmPassword, setConfirmPassword] = useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,reset
   } = useForm()
   const location = useLocation()
   const navigate = useNavigate()
   const from = location.state?.from?.pathname || "/"
 
   const onSubmit = (data) => {
-    // console.log(data)
+    // =============================
+    if (data.password !== data.confirmPassword) {
+
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Password and confirm password do not match',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+    // =====================================
+
 
     //create user and update user profile
     createUser(data.email, data.password)
@@ -36,7 +51,7 @@ const SignUp = () => {
           showConfirmButton: false,
           timer: 1500
         })
-        
+        reset()
         navigate(from, { replace: true })
 
         
@@ -122,7 +137,7 @@ const SignUp = () => {
           )}
         </div>
         {/* TODO:password type change */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="password" className="block mb-2">
             Password
           </label>
@@ -140,7 +155,51 @@ const SignUp = () => {
               Password must be at least 8 characters long
             </span>
           )}
-        </div>
+        </div> */}
+
+        {/* ========================= */}
+        <div className="mb-4">
+        <label htmlFor="password" className="block mb-2">
+          Password
+        </label>
+        <input
+          type="text"
+          id="password"
+          defaultValue="!4aASDFWF"
+          {...register('password', { required: true, minLength: 8 })}
+          className={`w-full px-3 py-2 border ${
+            errors.password ? 'border-red-500' : 'border-gray-300'
+          } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+        />
+        {errors.password && (
+          <span className="text-red-500 text-sm mt-1">
+            Password must be at least 8 characters long
+          </span>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="confirmPassword" className="block mb-2">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          {...register('confirmPassword', {
+            required: true,
+            validate: (value) => value === watch('password'),
+          })}
+          className={`w-full px-3 py-2 border ${
+            errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+          } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+        />
+        {errors.confirmPassword && (
+          <span className="text-red-500 text-sm mt-1">
+            Please confirm your password
+          </span>
+        )}
+      </div>
+        {/* ========================= */}
 
         <div className="mb-4">
           <label htmlFor="image" className="block mb-2">

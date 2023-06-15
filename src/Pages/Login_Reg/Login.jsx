@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useForm } from "react-hook-form"
 import { AuthContext } from "../../Provider/AuthProvider"
 
@@ -9,6 +9,13 @@ const Login = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const from = location.state?.from?.pathname || "/"
+
+  //show and hide password ================
+  const [show,setShow] = useState(false)
+  const handleShowPassword=()=>{
+    setShow(!show)
+  }
+  
 
   const {
     register,
@@ -59,7 +66,7 @@ const Login = () => {
             </label>
             {/* TODO:password type change */}
             <input
-              type="text"
+              type={show?'text':'password'}
               defaultValue={"!4aASDFWF"}
               id="password"
               {...register("password", {
@@ -72,6 +79,7 @@ const Login = () => {
                 errors.password ? "border-red-500" : "border-gray-300"
               } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
+            <div onClick={handleShowPassword} className="btn btn-error btn-outline btn-xs mt-2">{!show?'Show':'Hide'}</div>
             {errors.password && (
               <span className="text-red-500 text-sm mt-1">
                 Password must be at least 8 characters long and contain at least
@@ -81,7 +89,7 @@ const Login = () => {
           </div>
           <div className="my-4 ">
             <p>
-              Do you have any account6 ?{" "}
+              Do you have any account6 ?
               <Link to="/signup" className="text-blue-500">
                 Sing up
               </Link>
