@@ -2,6 +2,7 @@ import BannerSlider from "./Components/Banner/BannerSlider"
 import PopularClass from "./Components/PopularClass/PopularClass"
 import PopularInstructor from "./Components/PopularInstructor/PopularInstractor"
 import SectionTitle from "./Components/SectionTitle"
+import Discount from "./Pages/ExtraPage/Discount"
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
       </div>
       <SectionTitle
         heading={"Popular class"}
-        sub_heading={"this is sub heading ,added letter"}
+        sub_heading={""}
       ></SectionTitle>
       <div>
         <PopularClass></PopularClass>
@@ -19,10 +20,14 @@ const Home = () => {
       <div>
         <SectionTitle
           heading={"Popular Instructors"}
-          sub_heading={"this is popular instructor section ,added letter"}
+          sub_heading={""}
         ></SectionTitle>
         <PopularInstructor></PopularInstructor>
       </div>
+      <div>
+        <SectionTitle heading={"Offer"} sub_heading={""}></SectionTitle>
+      </div>
+      <Discount></Discount>
     </div>
   )
 }

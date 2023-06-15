@@ -15,7 +15,8 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,reset
+    watch,
+    reset,
   } = useForm()
   const location = useLocation()
   const navigate = useNavigate()
@@ -24,18 +25,16 @@ const SignUp = () => {
   const onSubmit = (data) => {
     // =============================
     if (data.password !== data.confirmPassword) {
-
       Swal.fire({
-        position: 'top',
-        icon: 'error',
-        title: 'Password and confirm password do not match',
+        position: "top",
+        icon: "error",
+        title: "Password and confirm password do not match",
         showConfirmButton: false,
         timer: 1500,
-      });
-      return;
+      })
+      return
     }
     // =====================================
-
 
     //create user and update user profile
     createUser(data.email, data.password)
@@ -45,16 +44,14 @@ const SignUp = () => {
         updateUserProfile(data.name, data.image)
         saveUser(userCredential?.user, data.name, data.image)
         Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'create user successfully',
+          position: "top",
+          icon: "success",
+          title: "create user successfully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         })
         reset()
         navigate(from, { replace: true })
-
-        
       })
       .catch((error) => {
         console.log("create user error", error)
@@ -105,6 +102,7 @@ const SignUp = () => {
           </label>
           <input
             type="text"
+            required
             id="name"
             {...register("name", { required: true })}
             className={`w-full px-3 py-2 border ${
@@ -124,6 +122,7 @@ const SignUp = () => {
           </label>
           <input
             type="email"
+            required
             id="email"
             {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             className={`w-full px-3 py-2 border ${
@@ -159,46 +158,61 @@ const SignUp = () => {
 
         {/* ========================= */}
         <div className="mb-4">
-        <label htmlFor="password" className="block mb-2">
-          Password
-        </label>
-        <input
-          type="text"
-          id="password"
-          defaultValue="!4aASDFWF"
-          {...register('password', { required: true, minLength: 8 })}
-          className={`w-full px-3 py-2 border ${
-            errors.password ? 'border-red-500' : 'border-gray-300'
-          } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
-        />
-        {errors.password && (
-          <span className="text-red-500 text-sm mt-1">
-            Password must be at least 8 characters long
-          </span>
-        )}
-      </div>
+          <label htmlFor="password" className="block mb-2">
+            Password
+          </label>
+          <input
+            type="text"
+            id="password"
+            required
+            defaultValue="!4aASDFWF"
+            {...register("password", {
+              required: true,
+              minLength: 8,
+              pattern:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/,
+            })}
+            className={`w-full px-3 py-2 border ${
+              errors.password ? "border-red-500" : "border-gray-300"
+            } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          />
+         
+          {errors.password && (
+            <span className="text-red-500 text-sm mt-1">
+            Password must be at least 8 characters long and contain at least
+              one uppercase letter, one lowercase letter, and one number.
+            </span>
+          )}
+        </div>
 
-      <div className="mb-4">
-        <label htmlFor="confirmPassword" className="block mb-2">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          id="confirmPassword"
-          {...register('confirmPassword', {
-            required: true,
-            validate: (value) => value === watch('password'),
-          })}
-          className={`w-full px-3 py-2 border ${
-            errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-          } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
-        />
-        {errors.confirmPassword && (
-          <span className="text-red-500 text-sm mt-1">
-            Please confirm your password
-          </span>
-        )}
-      </div>
+        <div className="mb-4">
+          <label htmlFor="confirmPassword" className="block mb-2">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            required
+            id="confirmPassword"
+            {...register("confirmPassword", {
+              required: true,
+              validate: (value) => value === watch("password"),
+            })}
+            className={`w-full px-3 py-2 border ${
+              errors.confirmPassword ? "border-red-500" : "border-gray-300"
+            } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          />{" "}
+          {errors.password && (
+            <span className="text-red-500 text-sm mt-1">
+              Password must be at least 8 characters long and contain at least
+              one uppercase letter, one lowercase letter, and one number.
+            </span>
+          )}
+          {errors.confirmPassword && (
+            <span className="text-red-500 text-sm mt-1">
+              Please confirm your password
+            </span>
+          )}
+        </div>
         {/* ========================= */}
 
         <div className="mb-4">
@@ -208,6 +222,7 @@ const SignUp = () => {
           <input
             type="text"
             id="image"
+            required
             {...register("image", { required: true })}
             className={`w-full px-3 py-2 border ${
               errors.image ? "border-red-500" : "border-gray-300"
