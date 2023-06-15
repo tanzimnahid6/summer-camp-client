@@ -12,7 +12,10 @@ const ClassCard = ({ item }) => {
   const location = useLocation()
   console.log(location);
 
-  const isStudent = role === "admin" || 'instructor'
+  // const isStudent = role === "admin" 
+  const isStudent = role === "admin" || role ==='instructor'
+
+  console.log(isStudent);
  
   const handleSelect = (item) => {
     console.log(item)
@@ -102,7 +105,7 @@ const ClassCard = ({ item }) => {
             <button
               onClick={() => handleSelect(item)}
               className="btn btn-primary"
-              disabled={isStudent}
+              disabled={isStudent ? true : false}
             >
               Select
             </button>
