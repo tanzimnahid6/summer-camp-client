@@ -15,6 +15,7 @@ import Enrolled from "../Pages/DashBoard/Student/Enrolled"
 import SelectClass from "../Pages/DashBoard/Student/SelectClass"
 import ErrorPage from "../Pages/ErrorPage"
 import Payment from "../Pages/DashBoard/Payment/Payment"
+import PaymentHistory from "../Pages/DashBoard/Student/PaymentHistory"
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         {
           path:'payment/:id',
           element:<Payment></Payment>
+        },
+        {
+          path:'paymentHistory',
+          element:<PaymentHistory></PaymentHistory>
         }
     ]
   },

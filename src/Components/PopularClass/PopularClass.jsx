@@ -14,7 +14,7 @@ const PopularClass = () => {
 
   return (
     <div>
-      <div className="flex w-full justify-between gap-4 my-12">
+      <div className=" w-full grid grid-cols-1 md:grid-cols-3  gap-4 my-12">
         {popularClass.map((item) => (
           <ClassCard item={item} key={item._id}></ClassCard>
         ))}
