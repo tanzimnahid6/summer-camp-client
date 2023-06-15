@@ -9,7 +9,7 @@ const PopularClass = () => {
     queryKey: ["popularClass"],
     queryFn: () => axios.get(url),
   })
-  console.log()
+  
   const popularClass = data?.data || []
 
   return (

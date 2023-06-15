@@ -1,11 +1,13 @@
 
 
-export const saveUser = (user) => {
+export const saveUser = (user,name,image) => {
 
     console.log(user);
     const currentUser = {
       email: user.email,
-      role:"student"
+      role:"student",
+      name:name,
+      img:image
     }
 
 

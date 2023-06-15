@@ -7,7 +7,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { saveUser } from "../../util/Auth"
 
 const SignUp = () => {
-  const { createUser, loginGoogle, updateUserProfile,setLoading,loginUsers } = useContext(AuthContext)
+  const { createUser, loginGoogle, updateUserProfile, setLoading, loginUsers } =
+    useContext(AuthContext)
   // console.log(loginUsers);
   const {
     register,
@@ -25,23 +26,20 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((userCredential) => {
         //update user profile
-        saveUser(userCredential?.user)
+
         updateUserProfile(data.name, data.image)
-        .then(() => {
-          navigate(from, { replace: true })
-    
+        saveUser(userCredential?.user, data.name, data.image)
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'create user successfully',
+          showConfirmButton: false,
+          timer: 1500
         })
         
-        // const user = userCredential.user
-        // console.log(user)
+        navigate(from, { replace: true })
 
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "User create successfully",
-          showConfirmButton: false,
-          timer: 1000,
-        })
+        
       })
       .catch((error) => {
         console.log("create user error", error)
@@ -53,16 +51,16 @@ const SignUp = () => {
     loginGoogle()
       .then((result) => {
         const user = result.user
-        
-        console.log(user);
-        console.log(user.email);
 
-        updateUserProfile(user?.displayName, user?.photoURL )
+        console.log(user)
+        console.log(user.email)
 
-        const isExist = loginUsers.find(item=>item.email===user?.email)
-        console.log(isExist);
-        const newUser = {email:isExist.email,role:isExist.role}
-        if(!isExist){
+        updateUserProfile(user?.displayName, user?.photoURL)
+
+        const isExist = loginUsers.find((item) => item.email === user?.email)
+        console.log(isExist)
+        const newUser = { email: isExist.email, role: isExist.role }
+        if (!isExist) {
           saveUser(newUser)
         }
 
