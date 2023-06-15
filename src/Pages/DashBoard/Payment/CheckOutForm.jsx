@@ -15,7 +15,7 @@ const CheckOutForm = ({ price, id,name,picture }) => {
   const [transactionId, setTransactionId] = useState("")
 
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/create-payment-intent`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ price:parseInt(price) }),
@@ -82,7 +82,7 @@ const CheckOutForm = ({ price, id,name,picture }) => {
         picture,
         orderStatus: "pending",
       }
-      fetch(`http://localhost:5000/payments`, {
+      fetch(`https://summer-camp-server-eight-kappa.vercel.app/payments`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payment),

@@ -47,7 +47,7 @@ const ClassCard = ({ item }) => {
       })
     } else {
       const newItem = { ...item, userEmail: user?.email }
-      fetch(`http://localhost:5000/selectClass`, {
+      fetch(`https://summer-camp-server-eight-kappa.vercel.app/selectClass`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

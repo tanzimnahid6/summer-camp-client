@@ -17,6 +17,7 @@ const AddClass = () => {
     formState: { errors },
     setValue,
     watch,
+    reset
   } = useForm()
   const startingDate = watch("starting_date")
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
@@ -64,7 +65,7 @@ const AddClass = () => {
           }
 
           //upload data in to database==========================================
-          fetch(`http://localhost:5000/allClass`, {
+          fetch(`https://summer-camp-server-eight-kappa.vercel.app/allClass`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -74,6 +75,7 @@ const AddClass = () => {
             .then((response) => response.json())
             .then((result) => {
               console.log(result)
+              reset()
               Swal.fire({
                 position: "top-end",
                 icon: "success",

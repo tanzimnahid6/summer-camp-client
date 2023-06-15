@@ -11,7 +11,7 @@ const FeedBackModal = ({ closeModal, isOpen, id }) => {
 
   const onSubmit = (data) => {
    
-    fetch(`http://localhost:5000/feedBack/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/feedBack/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

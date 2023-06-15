@@ -3,7 +3,7 @@ import axios from "axios"
 import ClassCard from "./ClassCard"
 
 const PopularClass = () => {
-  const url = `http://localhost:5000/popularClass` //==========================modified
+  const url = `https://summer-camp-server-eight-kappa.vercel.app/popularClass` //==========================modified
 
   const { data } = useQuery({
     queryKey: ["popularClass"],

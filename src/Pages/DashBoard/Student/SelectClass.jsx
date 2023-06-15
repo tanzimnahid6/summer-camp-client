@@ -11,7 +11,7 @@ const SelectClass = () => {
   console.log(data)
   const handleDelete = (id) => {
     console.log(id)
-    fetch(`http://localhost:5000/selectClass/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/selectClass/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

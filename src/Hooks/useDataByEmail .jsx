@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useDataByEmail = (email) => {
   const fetchData = async () => {
-    const response = await axios.get(`http://localhost:5000/selectClass/${email}`);
+    const response = await axios.get(`https://summer-camp-server-eight-kappa.vercel.app/selectClass/${email}`);
     return response.data;
   };
 

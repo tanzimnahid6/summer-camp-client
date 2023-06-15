@@ -54,7 +54,7 @@ const ClassCard = ({ item }) => {
         status:item.status,
         userEmail: user?.email,
       }
-      fetch(`http://localhost:5000/selectClass`, {
+      fetch(`https://summer-camp-server-eight-kappa.vercel.app/selectClass`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -102,7 +102,7 @@ const ClassCard = ({ item }) => {
             <button
               onClick={() => handleSelect(item)}
               className="btn btn-primary"
-              disabled={!isStudent}
+              disabled={isStudent}
             >
               Select
             </button>

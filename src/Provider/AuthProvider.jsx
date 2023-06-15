@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
 
   //get previous login user====================
   useEffect(() => {
-    fetch(`http://localhost:5000/users`)
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/users`)
       .then((res) => res.json())
       .then((data) => {
         setLoginUsers(data)

@@ -3,7 +3,7 @@ const useApproved = () => {
     const {data:approvedClass=[],isLoading:loading,refetch} = useQuery({
         queryKey:["approvedClass"],
         queryFn: async ()=>{
-            const res = await fetch(`http://localhost:5000/approvedClass`)
+            const res = await fetch(`https://summer-camp-server-eight-kappa.vercel.app/approvedClass`)
             return res.json()
         }
     })

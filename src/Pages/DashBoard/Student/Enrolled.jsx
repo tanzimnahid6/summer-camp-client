@@ -7,7 +7,7 @@ const Enrolled = () => {
   const { data: enrolled = [] } = useQuery({
     queryKey: ["enrolled"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/payment/${user?.email}`)
+      const res = await fetch(`https://summer-camp-server-eight-kappa.vercel.app/payment/${user?.email}`)
       return res.json()
     },
   })

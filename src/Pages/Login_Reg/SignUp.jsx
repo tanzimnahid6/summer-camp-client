@@ -162,10 +162,10 @@ const SignUp = () => {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
             required
-            defaultValue="!4aASDFWF"
+            
             {...register("password", {
               required: true,
               minLength: 8,

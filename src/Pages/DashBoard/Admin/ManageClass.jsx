@@ -21,7 +21,7 @@ const ManageClass = () => {
 
 
   const handleApproved = (id) => {
-    fetch(`http://localhost:5000/allClass/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/allClass/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -44,7 +44,7 @@ const ManageClass = () => {
   }
 
   const handleDeny = (id) => {
-    fetch(`http://localhost:5000/allClass/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/allClass/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

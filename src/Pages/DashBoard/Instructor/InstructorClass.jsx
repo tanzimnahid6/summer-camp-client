@@ -6,7 +6,7 @@ import { AuthContext } from "../../../Provider/AuthProvider"
 const InstructorClass = () => {
   const { user } = useContext(AuthContext)
   const userEmail = user?.email
-  const url = `http://localhost:5000/allClass/${userEmail}`
+  const url = `https://summer-camp-server-eight-kappa.vercel.app/allClass/${userEmail}`
 
   const { data } = useQuery({
     queryKey: ["instructorClass"],

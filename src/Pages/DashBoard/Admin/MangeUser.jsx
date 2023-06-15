@@ -8,7 +8,7 @@ const MangeUser = () => {
   //Admin make another user admin
   const handleAdmin = (id) => {
     console.log(id)
-    fetch(`http://localhost:5000/updateUserRole/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/updateUserRole/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,7 @@ const MangeUser = () => {
   const handleInstructor = (id) => {
     console.log(id)
 
-    fetch(`http://localhost:5000/updateUserRole/${id}`, {
+    fetch(`https://summer-camp-server-eight-kappa.vercel.app/updateUserRole/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
