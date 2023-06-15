@@ -16,3 +16,8 @@
 - The admin has the authority to manage all users on the website.They can approve or deny uploaded classes.The admin can assign user roles such as admin or instructor and also delete users if necessary.
 
 By organizing the website in this manner, we ensure a seamless user experience for students, instructors, and admins, offering a comprehensive and engaging platform for culinary learning and interaction.
+
+ - [summer camp ](https://summer-camp-10287.web.app/)
+
+user:admin@gmail.com
+pass:!4aASDFWF
