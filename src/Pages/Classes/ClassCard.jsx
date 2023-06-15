@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AuthContext } from "../../Provider/AuthProvider"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
+import {   useLocation, useNavigate } from "react-router-dom"
 // import useDataByEmail from "../../Hooks/useDataByEmail "
 import useRole from "../../Hooks/useRole"
 
@@ -9,28 +9,17 @@ const ClassCard = ({ item }) => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
   const role = useRole()
-  // console.log(role);
-  const isStudent = role === "student"
-  //get selected class by email===============================================
-  // const { data, refetch } = useDataByEmail(user?.email)
-  // console.log(data)
+  const location = useLocation()
+  console.log(location);
 
+  const isStudent = role === "admin" || 'instructor'
+ 
   const handleSelect = (item) => {
     console.log(item)
 
-    // const isExits = data.find((d) => d._id === item._id  && d.userEmail==user?.email)
-
-    // console.log(isExits)
-    // if (isExits) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "This class already selected!",
-    //   })
-    //   return
-    // }
 
     if (!user) {
+      
       Swal.fire({
         title: "Are you select the class?",
         text: "If you want to select this class,you have to login first",
@@ -41,7 +30,10 @@ const ClassCard = ({ item }) => {
         confirmButtonText: "Login!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login")
+          navigate("/login", { state: location })
+          
+         
+          
         }
       })
     } else {
@@ -76,7 +68,7 @@ const ClassCard = ({ item }) => {
             Swal.fire({
               position: "top",
               icon: "error",
-              title: "Your data already exits",
+              title: "Your class already exits",
               showConfirmButton: false,
               timer: 1500,
             })

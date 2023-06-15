@@ -9,6 +9,7 @@ const Login = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const from = location.state?.from?.pathname || "/"
+  console.log(from);
 
   //show and hide password ================
   const [show,setShow] = useState(false)
@@ -28,7 +29,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user
         console.log(user);
-        navigate(from, { replace: true })
+        navigate('/classes')
       
       })
       .catch((error) => {
@@ -64,7 +65,7 @@ const Login = () => {
             <label htmlFor="password" className="block mb-2">
               Password
             </label>
-            {/* TODO:password type change */}
+           
             <input
               type={show?'text':'password'}
               
