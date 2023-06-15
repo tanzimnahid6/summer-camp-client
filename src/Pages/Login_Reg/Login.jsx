@@ -80,6 +80,7 @@ const Login = () => {
               } rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             <div onClick={handleShowPassword} className="btn btn-error btn-outline btn-xs mt-2">{!show?'Show':'Hide'}</div>
+            <span className="text-slate-500 ml-12">Given a sample password </span>
             {errors.password && (
               <span className="text-red-500 text-sm mt-1">
                 Password must be at least 8 characters long and contain at least

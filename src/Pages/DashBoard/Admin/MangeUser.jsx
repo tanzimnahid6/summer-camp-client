@@ -80,15 +80,18 @@ const MangeUser = () => {
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td className="flex flex-col gap-2 ">
-                    <div
+                    <button
                       onClick={() => handleAdmin(item._id)}
-                      className={`btn btn-sm btn-info ${item.role == 'admin' && 'disabled'}`}
+                      className={`btn btn-sm btn-info`}
+                      disabled={item.role=='admin'  && true}
+                      
                     >
                       Admin
-                    </div>
+                    </button>
                     <div
                       onClick={() => handleInstructor(item._id)}
                       className="btn btn-sm btn-success"
+                      disabled={ item.role=='instructor' && true}
                     >
                       Instructor
                     </div>
